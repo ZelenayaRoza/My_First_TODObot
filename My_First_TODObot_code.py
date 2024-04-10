@@ -34,8 +34,8 @@ def help(message):
 
 @bot.message_handler(commands = ["add", "todo"])
 def add(message):
-    command = message.text
-    if len(command) < 5:
+    command = message.text.split()
+    if len(command) < 3:
         text = "Вы не ввели дату задачи"
         bot.send_message(message.chat.id, text)
         return
@@ -60,8 +60,8 @@ def random_add(message):
 
 @bot.message_handler(commands = ["show", "print"])
 def show(message):
-    command = message.text
-    if len(command) < 6:
+    command = message.text.split()
+    if len(command) < 2:
         text = "Вы не ввели дату задачи"
         bot.send_message(message.chat.id, text)
         return
