@@ -18,11 +18,11 @@ HELP = """
 tasks = {}
 
 def add_todo(date, task):
-   if date in tasks:
-       tasks[date].append(task)
-   else:
-       tasks[date] = []
-       tasks[date].append(task)
+  if date in tasks:
+      tasks[date].append(task)
+  else:
+      tasks[date] = []
+      tasks[date].append(task)
 
 @bot.message_handler(commands = ["start"])
 def start(message):
