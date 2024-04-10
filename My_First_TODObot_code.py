@@ -83,3 +83,7 @@ def show(message):
 # except:
 
 bot.polling(none_stop = True)
+
+
+
+рррррр
