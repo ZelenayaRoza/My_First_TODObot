@@ -83,3 +83,36 @@ def show(message):
 # except:
 
 bot.polling(none_stop = True)
+
+
+
+python
+import telebot
+from telebot import types
+
+API_TOKEN = 'YOUR_API_TOKEN'
+bot = telebot.TeleBot(API_TOKEN)
+
+tasks = {}  # Словарь для хранения задач
+
+@bot.message_handler(commands=['add'])
+def add_task(message):
+    chat_id = message.chat.id
+    bot.send_message(chat_id, "Введите дату задачи (например, 31.12.2022):")
+    bot.register_next_step_handler(message, get_date)
+
+def get_date(message):
+    chat_id = message.chat.id
+    date = message.text
+    tasks[date] = ""
+    bot.send_message(chat_id, "Введите текст задачи:")
+    bot.register_next_step_handler(message, get_task)
+
+def get_task(message):
+    chat_id = message.chat.id
+    task_text = message.text
+    date = list(tasks.keys())[-1]  # Получаем последнюю введенную дату
+    tasks[date] = task_text
+    bot.send_message(chat_id, f"Задача {task_text} добавлена в список на {date}")
+
+bot.polling()
